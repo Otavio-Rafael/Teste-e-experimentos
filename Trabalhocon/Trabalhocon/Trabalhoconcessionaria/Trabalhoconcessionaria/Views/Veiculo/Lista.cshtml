@@ -1,0 +1,66 @@
+﻿@model IEnumerable<Trabalhoconcessionaria.Models.Veiculo>//Aqui é onde cria a lista
+
+@{
+    ViewData["Title"] = "Lista";
+}
+
+<div class="text-center">
+<h1>Lista</h1>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Marca)<!--Onde recebe as informações para a lista-->
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Modelo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ano)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Placa)
+            </th>
+            <th>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) 
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Marca)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Modelo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ano)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Placa)
+                </td>
+                <td>
+                    @if (item is Trabalhoconcessionaria.Models.Carro carro)
+                    {
+                        <text>Carro - @carro.QuantidadePortas portas</text>
+                    }
+                    else if (item is Trabalhoconcessionaria.Models.Moto moto)
+                    {
+                        <text>Moto - @(moto.TemCarenagem ? "com carenagem" : "sem carenagem")</text>
+                    }
+                    @if (item is Van van)
+                    {
+                        <text>Van - @van.CapacidadePassageiros passageiros</text>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
