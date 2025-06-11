@@ -1,0 +1,47 @@
+﻿@{//aqui é onde cria as funções da pagina onde sera feito o cadastro do veiculo.
+    ViewData["Title"] = "Cadastro de Veículo";
+}
+
+<h2>Cadastro de Veículo</h2>
+
+<form asp-action="Cadastro" method="post">
+    <label>Tipo:</label>
+    <select name="tipo" id="tipo" onchange="ajustarCampos()"><!--Aqui ele puxa os campos carro ou moto de acordo com a opção selecionada-->
+        <option value="Carro">Carro</option>
+        <option value="Moto">Moto</option>
+    </select><br />
+
+    <label>Marca:</label><!--Aqui pede os dados da classe veiculo-->
+    <input type="text" name="marca" required /><br />
+
+    <label>Modelo:</label>
+    <input type="text" name="modelo" required /><br />
+
+    <label>Ano:</label>
+    <input type="number" name="ano" required /><br />
+    
+    <label>Placa:</label>
+    <input type="number" name="placa" required /><br />
+
+    <div id="campoCarro"><!--Aqui pede porta para carro-->
+        <label>Quantidade de Portas:</label>
+        <input type="number" name="quantidadePortas" min="2" max="5" /><br />
+    </div>
+
+    <div id="campoMoto" style="display:none;"><!--Aqui pede carenagem para moto-->
+        <label>Tem carenagem?</label>
+        <input type="checkbox" name="temCarenagem" /><br />
+    </div>
+
+    <button type="submit">Cadastrar</button>
+</form>
+
+<script>//Aqui é um código javascript para puxar exibir as opções porta ou carenagem de acordo com o tipo de veiculo
+    function ajustarCampos() {
+        var tipo = document.getElementById("tipo").value;
+        document.getElementById("campoCarro").style.display = tipo === "Carro" ? "block" : "none";
+        document.getElementById("campoMoto").style.display = tipo === "Moto" ? "block" : "none";
+    }
+    ajustarCampos();
+</script>
+
